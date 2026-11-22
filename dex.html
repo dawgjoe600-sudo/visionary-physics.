@@ -1,0 +1,1579 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VISIONARY CHAT — Class 10 CBSE Physics AI</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Inter & Playfair Display -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-pure: #FFFFFF;
+            --bg-subtle: #F8FAFC;
+            --text-primary: #0F172A;
+            --text-secondary: #475569;
+            --border-hairline: #E2E8F0;
+        }
+
+        * {
+            box-sizing: border-box;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(180deg, #FFFFFF 0%, #F9FBFD 100%);
+            color: var(--text-primary);
+            overflow: hidden;
+        }
+
+        /* Custom subtle scrollbars */
+        ::-webkit-scrollbar {
+            width: 5px;
+            height: 5px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: rgba(148, 163, 184, 0.28);
+            border-radius: 9999px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(100, 116, 139, 0.45);
+        }
+
+        /* =========================================================
+           SCULPTED LIQUID GLASS BUBBLE & CAPSULE AESTHETIC
+           ========================================================= */
+        .liquid-glass-bubble {
+            position: relative;
+            background: linear-gradient(
+                135deg,
+                rgba(255, 255, 255, 0.94) 0%,
+                rgba(241, 245, 249, 0.72) 48%,
+                rgba(255, 255, 255, 0.92) 100%
+            );
+            backdrop-filter: blur(18px) saturate(160%);
+            -webkit-backdrop-filter: blur(18px) saturate(160%);
+            /* Organic fluid-sculpted glass border radii */
+            border-radius: 26px 24px 28px 10px;
+            border: 1px solid rgba(255, 255, 255, 0.95);
+            box-shadow:
+                /* Outer soft ambient elevation */
+                0 14px 32px -8px rgba(15, 23, 42, 0.07),
+                0 4px 12px -2px rgba(148, 163, 184, 0.14),
+                /* Top specular liquid rim highlight */
+                inset 0 2px 5px rgba(255, 255, 255, 1),
+                /* Bottom refractive caustic shadow */
+                inset 0 -4px 10px rgba(148, 163, 184, 0.22),
+                /* Left & right curved glass edge sheen */
+                inset 3px 0 8px rgba(255, 255, 255, 0.85),
+                inset -3px 0 8px rgba(203, 213, 225, 0.35);
+            color: #0F172A;
+            transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.25s ease;
+        }
+
+        /* Subtle glossy liquid meniscus highlight across top edge */
+        .liquid-glass-bubble::before {
+            content: "";
+            position: absolute;
+            top: 2px;
+            left: 14px;
+            right: 18px;
+            height: 36%;
+            border-radius: 22px 20px 40px 40px;
+            background: linear-gradient(
+                180deg,
+                rgba(255, 255, 255, 0.82) 0%,
+                rgba(255, 255, 255, 0.0) 100%
+            );
+            pointer-events: none;
+        }
+
+        /* Subtle SVG organic wave shimmer overlay on the glass edge */
+        .liquid-glass-bubble::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            border-radius: inherit;
+            box-shadow: inset 0 0 0 1px rgba(203, 213, 225, 0.45);
+            pointer-events: none;
+        }
+
+        /* Sculpted Liquid Glass Input Capsule */
+        .liquid-glass-input {
+            position: relative;
+            background: linear-gradient(
+                180deg,
+                rgba(255, 255, 255, 0.95) 0%,
+                rgba(241, 245, 249, 0.78) 55%,
+                rgba(255, 255, 255, 0.94) 100%
+            );
+            backdrop-filter: blur(20px) saturate(170%);
+            -webkit-backdrop-filter: blur(20px) saturate(170%);
+            border-radius: 9999px;
+            border: 1px solid rgba(255, 255, 255, 0.98);
+            box-shadow:
+                0 16px 36px -10px rgba(15, 23, 42, 0.08),
+                0 4px 14px -2px rgba(148, 163, 184, 0.16),
+                inset 0 2px 5px rgba(255, 255, 255, 1),
+                inset 0 -3px 9px rgba(148, 163, 184, 0.24),
+                inset 4px 0 10px rgba(255, 255, 255, 0.85),
+                inset -4px 0 10px rgba(203, 213, 225, 0.32),
+                0 0 0 1px rgba(203, 213, 225, 0.55);
+            transition: box-shadow 0.25s ease, transform 0.2s ease;
+        }
+
+        .liquid-glass-input:focus-within {
+            box-shadow:
+                0 18px 40px -8px rgba(15, 23, 42, 0.11),
+                0 6px 16px -2px rgba(148, 163, 184, 0.22),
+                inset 0 2px 6px rgba(255, 255, 255, 1),
+                inset 0 -3px 9px rgba(148, 163, 184, 0.26),
+                0 0 0 1.5px rgba(148, 163, 184, 0.75);
+        }
+
+        /* Circular Frosted Send Button inside capsule */
+        .liquid-send-btn {
+            background: linear-gradient(145deg, #CBD5E1 0%, #94A3B8 100%);
+            box-shadow:
+                inset 0 1px 2px rgba(255, 255, 255, 0.8),
+                0 2px 6px rgba(15, 23, 42, 0.12);
+            transition: all 0.2s ease;
+        }
+        .liquid-send-btn:hover {
+            background: linear-gradient(145deg, #475569 0%, #1E293B 100%);
+            transform: scale(1.04);
+        }
+
+        /* User Bubble: Clean flat neutral grey pill for high contrast */
+        .user-pill-bubble {
+            background-color: #E2E8F0;
+            color: #1E293B;
+            border-radius: 22px 22px 6px 22px;
+            box-shadow: 0 2px 8px rgba(15, 23, 42, 0.03);
+        }
+
+        /* Message entrance animation */
+        @keyframes floatIn {
+            0% {
+                opacity: 0;
+                transform: translateY(10px) scale(0.985);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+        .animate-float-in {
+            animation: floatIn 0.32s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+        }
+
+        /* Three-dot typing indicator pulse */
+        @keyframes dotPulse {
+            0%, 80%, 100% { transform: scale(0.75); opacity: 0.35; }
+            40% { transform: scale(1.1); opacity: 0.9; }
+        }
+        .typing-dot {
+            animation: dotPulse 1.3s infinite ease-in-out;
+        }
+        .typing-dot:nth-child(2) { animation-delay: 0.18s; }
+        .typing-dot:nth-child(3) { animation-delay: 0.36s; }
+
+        /* Formula & Code styling inside AI liquid bubbles */
+        .formula-chip {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.82);
+            border: 1px solid rgba(203, 213, 225, 0.7);
+            box-shadow: inset 0 1px 2px rgba(255,255,255,0.9);
+            padding: 3px 10px;
+            border-radius: 10px;
+            font-family: 'Inter', monospace;
+            font-weight: 600;
+            font-size: 0.86rem;
+            color: #0F172A;
+            margin: 2px 0;
+        }
+
+        .ai-prose h4 {
+            font-weight: 600;
+            font-size: 0.95rem;
+            color: #0F172A;
+            margin-top: 10px;
+            margin-bottom: 4px;
+        }
+        .ai-prose p {
+            margin-bottom: 8px;
+            line-height: 1.6;
+        }
+        .ai-prose p:last-child {
+            margin-bottom: 0;
+        }
+        .ai-prose ul {
+            list-style-type: disc;
+            padding-left: 18px;
+            margin-bottom: 8px;
+        }
+        .ai-prose li {
+            margin-bottom: 4px;
+            line-height: 1.55;
+        }
+    </style>
+</head>
+<body class="flex h-screen w-screen bg-white text-slate-900 select-none sm:select-auto">
+
+    <!-- Subtle SVG Filter Definition for Liquid Refraction Rim -->
+    <svg width="0" height="0" class="hidden" aria-hidden="true">
+        <defs>
+            <filter id="liquid-refraction" x="-5%" y="-5%" width="110%" height="110%">
+                <feTurbulence type="fractalNoise" baseFrequency="0.015 0.03" numOctaves="2" seed="3" result="noise" />
+                <feDisplacementMap in="SourceGraphic" in2="noise" scale="2.2" xChannelSelector="R" yChannelSelector="G" />
+            </filter>
+        </defs>
+    </svg>
+
+    <!-- Mobile Backdrop Overlay -->
+    <div id="mobile-backdrop" onclick="toggleSidebar(false)" class="fixed inset-0 bg-slate-900/15 backdrop-blur-[2px] z-30 hidden md:hidden transition-opacity"></div>
+
+    <!-- =========================================================
+         LEFT SIDEBAR (Thin, minimal, pure-white)
+         ========================================================= -->
+    <aside id="sidebar" class="fixed md:static inset-y-0 left-0 z-40 w-64 md:w-60 bg-white/95 md:bg-white border-r border-slate-200/80 flex flex-col justify-between transform -translate-x-full md:translate-x-0 transition-transform duration-300 ease-out">
+        
+        <!-- Top Brand & Navigation -->
+        <div class="flex flex-col flex-1 overflow-hidden">
+            <!-- Brand Header ("A.I.") -->
+            <div class="px-6 pt-7 pb-5 flex items-center justify-between">
+                <button onclick="startNewChat()" class="text-left group focus:outline-none">
+                    <span class="text-2xl font-bold tracking-tight text-slate-800 group-hover:text-slate-950 transition-colors">A.I.</span>
+                </button>
+                <!-- Close button on mobile -->
+                <button onclick="toggleSidebar(false)" class="md:hidden p-1.5 rounded-lg text-slate-400 hover:text-slate-700 hover:bg-slate-100" aria-label="Close sidebar">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/>
+                    </svg>
+                </button>
+            </div>
+
+            <!-- Primary Sidebar Links: + New Chat & HISTORY -->
+            <div class="px-4 space-y-1 mb-4">
+                <button onclick="startNewChat()" class="w-full flex items-center gap-2.5 px-2.5 py-2 rounded-xl text-xs font-medium tracking-wider uppercase text-slate-600 hover:text-slate-950 hover:bg-slate-100/80 transition-all">
+                    <svg class="w-3.5 h-3.5 text-slate-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15"/>
+                    </svg>
+                    <span>New Chat</span>
+                </button>
+
+                <button onclick="toggleHistoryDrawer()" id="history-toggle-btn" class="w-full flex items-center justify-between px-2.5 py-2 rounded-xl text-xs font-medium tracking-wider uppercase text-slate-600 hover:text-slate-950 hover:bg-slate-100/80 transition-all">
+                    <span class="flex items-center gap-2.5">
+                        <svg class="w-3.5 h-3.5 text-slate-500" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                        </svg>
+                        <span>HISTORY</span>
+                    </span>
+                    <span id="history-count-badge" class="text-[10px] font-semibold px-1.5 py-0.5 rounded-full bg-slate-100 text-slate-500">0</span>
+                </button>
+            </div>
+
+            <!-- Collapsible Saved History Panel -->
+            <div id="history-panel" class="hidden px-4 pb-3 border-b border-slate-100 max-h-40 overflow-y-auto">
+                <div id="history-list" class="space-y-1">
+                    <!-- Populated dynamically via JS -->
+                </div>
+            </div>
+
+            <!-- Divider -->
+            <div class="mx-6 border-t border-slate-100 my-1"></div>
+
+            <!-- CBSE Class 10 Physics Chapters & Topics -->
+            <div class="flex-1 overflow-y-auto px-4 py-3 space-y-4">
+                <div class="px-2 flex items-center justify-between">
+                    <span class="text-[10px] font-semibold uppercase tracking-[0.14em] text-slate-400">Class 10 Physics</span>
+                    <span class="text-[10px] text-slate-400">CBSE</span>
+                </div>
+
+                <!-- Chapter 1: Light -->
+                <div class="space-y-1">
+                    <button onclick="toggleChapter('ch-light')" class="w-full flex items-center justify-between px-2 py-1.5 text-left rounded-lg hover:bg-slate-50 group">
+                        <span class="text-xs font-semibold text-slate-700 group-hover:text-slate-950">01. Light – Reflection & Refraction</span>
+                        <svg id="icon-ch-light" class="w-3.5 h-3.5 text-slate-400 transform rotate-180 transition-transform" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/>
+                        </svg>
+                    </button>
+                    <div id="ch-light" class="pl-2 space-y-0.5">
+                        <button onclick="selectTopic('spherical-mirrors')" class="topic-btn w-full text-left px-2.5 py-1.5 rounded-lg text-[11.5px] text-slate-500 hover:text-slate-900 hover:bg-slate-100/70 transition-colors">Spherical Mirrors & Ray Diagrams</button>
+                        <button onclick="selectTopic('mirror-formula')" class="topic-btn w-full text-left px-2.5 py-1.5 rounded-lg text-[11.5px] text-slate-500 hover:text-slate-900 hover:bg-slate-100/70 transition-colors">Mirror Formula & Magnification</button>
+                        <button onclick="selectTopic('refraction-snells')" class="topic-btn w-full text-left px-2.5 py-1.5 rounded-lg text-[11.5px] text-slate-500 hover:text-slate-900 hover:bg-slate-100/70 transition-colors">Refraction & Snell's Law</button>
+                        <button onclick="selectTopic('spherical-lenses')" class="topic-btn w-full text-left px-2.5 py-1.5 rounded-lg text-[11.5px] text-slate-500 hover:text-slate-900 hover:bg-slate-100/70 transition-colors">Spherical Lenses & Power (P = 1/f)</button>
+                    </div>
+                </div>
+
+                <!-- Chapter 2: Human Eye -->
+                <div class="space-y-1">
+                    <button onclick="toggleChapter('ch-eye')" class="w-full flex items-center justify-between px-2 py-1.5 text-left rounded-lg hover:bg-slate-50 group">
+                        <span class="text-xs font-semibold text-slate-700 group-hover:text-slate-950">02. Human Eye & Colourful World</span>
+                        <svg id="icon-ch-eye" class="w-3.5 h-3.5 text-slate-400 transform transition-transform" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/>
+                        </svg>
+                    </button>
+                    <div id="ch-eye" class="hidden pl-2 space-y-0.5">
+                        <button onclick="selectTopic('eye-accommodation')" class="topic-btn w-full text-left px-2.5 py-1.5 rounded-lg text-[11.5px] text-slate-500 hover:text-slate-900 hover:bg-slate-100/70 transition-colors">Structure of Eye & Accommodation</button>
+                        <button onclick="selectTopic('vision-defects')" class="topic-btn w-full text-left px-2.5 py-1.5 rounded-lg text-[11.5px] text-slate-500 hover:text-slate-900 hover:bg-slate-100/70 transition-colors">Defects of Vision & Correction</button>
+                        <button onclick="selectTopic('prism-dispersion')" class="topic-btn w-full text-left px-2.5 py-1.5 rounded-lg text-[11.5px] text-slate-500 hover:text-slate-900 hover:bg-slate-100/70 transition-colors">Refraction Through Prism & Dispersion</button>
+                        <button onclick="selectTopic('atmospheric-scattering')" class="topic-btn w-full text-left px-2.5 py-1.5 rounded-lg text-[11.5px] text-slate-500 hover:text-slate-900 hover:bg-slate-100/70 transition-colors">Atmospheric Refraction & Tyndall Effect</button>
+                    </div>
+                </div>
+
+                <!-- Chapter 3: Electricity -->
+                <div class="space-y-1">
+                    <button onclick="toggleChapter('ch-elec')" class="w-full flex items-center justify-between px-2 py-1.5 text-left rounded-lg hover:bg-slate-50 group">
+                        <span class="text-xs font-semibold text-slate-700 group-hover:text-slate-950">03. Electricity</span>
+                        <svg id="icon-ch-elec" class="w-3.5 h-3.5 text-slate-400 transform transition-transform" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/>
+                        </svg>
+                    </button>
+                    <div id="ch-elec" class="hidden pl-2 space-y-0.5">
+                        <button onclick="selectTopic('ohms-law')" class="topic-btn w-full text-left px-2.5 py-1.5 rounded-lg text-[11.5px] text-slate-500 hover:text-slate-900 hover:bg-slate-100/70 transition-colors">Current, Potential & Ohm's Law</button>
+                        <button onclick="selectTopic('resistance-resistivity')" class="topic-btn w-full text-left px-2.5 py-1.5 rounded-lg text-[11.5px] text-slate-500 hover:text-slate-900 hover:bg-slate-100/70 transition-colors">Resistance & Resistivity (R = ρl/A)</button>
+                        <button onclick="selectTopic('series-parallel')" class="topic-btn w-full text-left px-2.5 py-1.5 rounded-lg text-[11.5px] text-slate-500 hover:text-slate-900 hover:bg-slate-100/70 transition-colors">Series & Parallel Combinations</button>
+                        <button onclick="selectTopic('heating-power')" class="topic-btn w-full text-left px-2.5 py-1.5 rounded-lg text-[11.5px] text-slate-500 hover:text-slate-900 hover:bg-slate-100/70 transition-colors">Heating Effect (H = I²Rt) & Power</button>
+                    </div>
+                </div>
+
+                <!-- Chapter 4: Magnetic Effects -->
+                <div class="space-y-1">
+                    <button onclick="toggleChapter('ch-mag')" class="w-full flex items-center justify-between px-2 py-1.5 text-left rounded-lg hover:bg-slate-50 group">
+                        <span class="text-xs font-semibold text-slate-700 group-hover:text-slate-950">04. Magnetic Effects of Current</span>
+                        <svg id="icon-ch-mag" class="w-3.5 h-3.5 text-slate-400 transform transition-transform" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/>
+                        </svg>
+                    </button>
+                    <div id="ch-mag" class="hidden pl-2 space-y-0.5">
+                        <button onclick="selectTopic('magnetic-field-thumb')" class="topic-btn w-full text-left px-2.5 py-1.5 rounded-lg text-[11.5px] text-slate-500 hover:text-slate-900 hover:bg-slate-100/70 transition-colors">Field Lines & Right-Hand Thumb Rule</button>
+                        <button onclick="selectTopic('solenoid-electromagnet')" class="topic-btn w-full text-left px-2.5 py-1.5 rounded-lg text-[11.5px] text-slate-500 hover:text-slate-900 hover:bg-slate-100/70 transition-colors">Solenoid & Electromagnet</button>
+                        <button onclick="selectTopic('flemings-left-hand')" class="topic-btn w-full text-left px-2.5 py-1.5 rounded-lg text-[11.5px] text-slate-500 hover:text-slate-900 hover:bg-slate-100/70 transition-colors">Fleming's Left-Hand Rule</button>
+                        <button onclick="selectTopic('domestic-circuits')" class="topic-btn w-full text-left px-2.5 py-1.5 rounded-lg text-[11.5px] text-slate-500 hover:text-slate-900 hover:bg-slate-100/70 transition-colors">Domestic Electric Circuits & Safety</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bottom Unobtrusive Connection & Proxy Trigger -->
+        <div class="px-5 py-3.5 border-t border-slate-100 flex items-center justify-between">
+            <button onclick="openSettingsModal()" class="flex items-center gap-2 text-[11px] text-slate-400 hover:text-slate-700 transition-colors" title="Configure proxy endpoint or view serverless backend code">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.7" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M9.594 3.94c.09-.542.56-.94 1.11-.94h2.593c.55 0 1.02.398 1.11.94l.213 1.281c.063.374.313.686.645.87.074.04.147.083.22.127.324.196.72.257 1.075.124l1.217-.456a1.125 1.125 0 011.37.49l1.296 2.247a1.125 1.125 0 01-.26 1.431l-1.003.827c-.293.24-.438.613-.431.992a6.759 6.759 0 010 .255c-.007.378.138.75.43.99l1.005.828c.424.35.534.954.26 1.43l-1.298 2.247a1.125 1.125 0 01-1.369.491l-1.217-.456c-.355-.133-.75-.072-1.076.124a6.57 6.57 0 01-.22.128c-.331.183-.581.495-.644.869l-.213 1.28c-.09.543-.56.941-1.11.941h-2.594c-.55 0-1.02-.398-1.11-.94l-.213-1.281c-.062-.374-.312-.686-.644-.87a6.52 6.52 0 01-.22-.127c-.325-.196-.72-.257-1.076-.124l-1.217.456a1.125 1.125 0 01-1.369-.49l-1.297-2.247a1.125 1.125 0 01.26-1.431l1.004-.827c.292-.24.437-.613.43-.992a6.932 6.932 0 010-.255c.007-.378-.138-.75-.43-.99l-1.004-.828a1.125 1.125 0 01-.26-1.43l1.297-2.247a1.125 1.125 0 011.37-.491l1.216.456c.356.133.751.072 1.076-.124.072-.044.146-.087.22-.128.332-.183.582-.495.644-.869l.214-1.281z"/>
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                </svg>
+                <span id="api-status-label">Proxy: /api/chat</span>
+            </button>
+            <span id="api-status-dot" class="w-1.5 h-1.5 rounded-full bg-emerald-400" title="Ready"></span>
+        </div>
+    </aside>
+
+    <!-- =========================================================
+         MAIN CHAT WORKSPACE (Pure white, centered title, liquid bubbles)
+         ========================================================= -->
+    <main class="flex-1 flex flex-col h-full relative bg-white overflow-hidden">
+        
+        <!-- Minimal Centered Header (No top navbar, no mode buttons, no avatar) -->
+        <header class="pt-6 pb-3 px-6 flex items-center justify-center relative shrink-0">
+            <!-- Mobile Hamburger Trigger -->
+            <button onclick="toggleSidebar(true)" class="md:hidden absolute left-5 p-2 rounded-xl text-slate-600 hover:bg-slate-100" aria-label="Open menu">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 9h16.5m-16.5 6.75h16.5"/>
+                </svg>
+            </button>
+
+            <div class="text-center">
+                <h1 class="text-base sm:text-lg font-normal tracking-[0.18em] text-slate-700 uppercase">VISIONARY CHAT</h1>
+                <p class="text-[10px] tracking-[0.22em] text-slate-400 uppercase mt-0.5">CBSE Class 10 Physics</p>
+            </div>
+        </header>
+
+        <!-- Scrollable Chat Messages Container -->
+        <div id="chat-scroll-area" class="flex-1 overflow-y-auto px-4 sm:px-8 py-4">
+            <div id="messages-container" class="max-w-2xl mx-auto space-y-6 pb-6">
+                <!-- Messages injected dynamically -->
+            </div>
+
+            <!-- Centered 3-Dot Typing Indicator -->
+            <div id="typing-indicator" class="hidden max-w-2xl mx-auto py-2 flex justify-center items-center gap-1.5">
+                <span class="typing-dot w-2 h-2 rounded-full bg-slate-400"></span>
+                <span class="typing-dot w-2 h-2 rounded-full bg-slate-400"></span>
+                <span class="typing-dot w-2 h-2 rounded-full bg-slate-400"></span>
+            </div>
+        </div>
+
+        <!-- Bottom Sculpted Liquid Glass Input Capsule -->
+        <div class="px-4 sm:px-8 pb-6 pt-2 shrink-0 bg-gradient-to-t from-white via-white/95 to-transparent">
+            <div class="max-w-2xl mx-auto">
+                <!-- Subtle Quick Prompt Chips -->
+                <div class="flex items-center gap-2 overflow-x-auto pb-2.5 no-scrollbar">
+                    <button onclick="sendQuickPrompt('Give me a 3-question MCQ quiz on Light & Lenses')" class="shrink-0 text-[11px] px-3 py-1 rounded-full bg-slate-50 hover:bg-slate-100 text-slate-500 hover:text-slate-800 border border-slate-200/70 transition-colors">
+                        Quiz: Light & Lenses
+                    </button>
+                    <button onclick="sendQuickPrompt('Solve a step-by-step Mirror Formula numerical')" class="shrink-0 text-[11px] px-3 py-1 rounded-full bg-slate-50 hover:bg-slate-100 text-slate-500 hover:text-slate-800 border border-slate-200/70 transition-colors">
+                        Mirror Formula Numerical
+                    </button>
+                    <button onclick="sendQuickPrompt('Compare Myopia and Hypermetropia with corrective lenses')" class="shrink-0 text-[11px] px-3 py-1 rounded-full bg-slate-50 hover:bg-slate-100 text-slate-500 hover:text-slate-800 border border-slate-200/70 transition-colors">
+                        Myopia vs Hypermetropia
+                    </button>
+                    <button onclick="sendQuickPrompt('All formulas of Class 10 Electricity')" class="shrink-0 text-[11px] px-3 py-1 rounded-full bg-slate-50 hover:bg-slate-100 text-slate-500 hover:text-slate-800 border border-slate-200/70 transition-colors">
+                        Electricity Formula Sheet
+                    </button>
+                </div>
+
+                <!-- Liquid Glass Input Bar -->
+                <form id="chat-form" onsubmit="handleSendMessage(event)" class="liquid-glass-input flex items-center px-3 py-2 gap-2">
+                    <!-- Left: Microphone Icon Button -->
+                    <button type="button" id="mic-btn" onclick="toggleVoiceInput()" class="p-2 rounded-full text-slate-600 hover:text-slate-950 hover:bg-white/60 transition-colors focus:outline-none" title="Voice input">
+                        <svg id="mic-icon" class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 18.75a6 6 0 006-6v-1.5m-6 7.5a6 6 0 01-6-6v-1.5m6 7.5v3.75m-3.75 0h7.5M12 15.75a3 3 0 01-3-3V4.5a3 3 0 116 0v8.25a3 3 0 01-3 3z"/>
+                        </svg>
+                    </button>
+
+                    <!-- Center: Borderless Input -->
+                    <input
+                        id="user-input"
+                        type="text"
+                        autocomplete="off"
+                        placeholder="Ask anything about Class 10 Physics..."
+                        class="flex-1 bg-transparent border-none outline-none text-sm text-slate-800 placeholder-slate-400 px-1"
+                    />
+
+                    <!-- Right: Circular Frosted Send Button -->
+                    <button type="submit" class="liquid-send-btn w-9 h-9 rounded-full flex items-center justify-center text-white shrink-0 focus:outline-none" aria-label="Send message">
+                        <svg class="w-4 h-4 translate-x-[0.5px]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M6 12L3.269 3.126A59.768 59.768 0 0121.485 12 59.77 59.77 0 013.27 20.876L5.999 12zm0 0h7.5"/>
+                        </svg>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <!-- =========================================================
+         PROXY CONNECTION & DEPLOYMENT MODAL (NO SECRET KEYS STORED)
+         ========================================================= -->
+    <div id="settings-modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-slate-900/20 backdrop-blur-xs p-4">
+        <div class="liquid-glass-bubble w-full max-w-2xl p-6 sm:p-7 animate-float-in max-h-[90vh] overflow-y-auto">
+            <div class="flex items-center justify-between mb-3">
+                <div>
+                    <h3 class="text-sm font-semibold tracking-wider uppercase text-slate-800">Public Proxy & Backend Setup</h3>
+                    <p class="text-[11px] text-slate-400 mt-0.5">Secret API keys stay safely on your server environment—never in browser code or storage.</p>
+                </div>
+                <button onclick="closeSettingsModal()" class="text-slate-400 hover:text-slate-700 p-1" aria-label="Close modal">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/>
+                    </svg>
+                </button>
+            </div>
+
+            <!-- Modal Tab Switcher -->
+            <div class="flex items-center gap-2 border-b border-slate-200/80 pb-3 mb-4">
+                <button id="tab-btn-connection" onclick="switchModalTab('connection')" class="px-3 py-1.5 rounded-xl text-xs font-medium bg-slate-800 text-white transition-colors">
+                    Proxy Endpoint
+                </button>
+                <button id="tab-btn-deploy" onclick="switchModalTab('deploy')" class="px-3 py-1.5 rounded-xl text-xs font-medium text-slate-600 hover:bg-slate-100 transition-colors">
+                    Deploy Proxy Code
+                </button>
+            </div>
+
+            <!-- Tab 1: Proxy Endpoint Configuration -->
+            <div id="modal-tab-connection">
+                <p class="text-xs text-slate-600 leading-relaxed mb-4">
+                    Share this frontend with your friends and point it to your backend proxy (default: <code class="px-1.5 py-0.5 bg-white/80 rounded border border-slate-200">/api/chat</code>). If <code class="px-1.5 py-0.5 bg-white/80 rounded border border-slate-200">/api/chat</code> isn't deployed yet, chat automatically falls back to the built-in <strong>CBSE Class 10 Physics</strong> study engine.
+                </p>
+
+                <label class="block text-[11px] font-medium uppercase tracking-wider text-slate-500 mb-1.5">Backend Proxy Endpoint URL</label>
+                <input id="proxy-url-input" type="text" placeholder="/api/chat" class="w-full px-3.5 py-2.5 text-xs bg-white/90 border border-slate-200 rounded-xl outline-none focus:border-slate-400 text-slate-800 mb-4"/>
+
+                <div class="flex items-center justify-between gap-2 pt-1">
+                    <button onclick="resetProxyUrl()" class="px-3.5 py-2 text-xs text-slate-500 hover:text-slate-800 rounded-xl">Reset to /api/chat</button>
+                    <button onclick="saveProxySettings()" class="px-4 py-2 text-xs font-medium bg-slate-800 hover:bg-slate-950 text-white rounded-xl transition-colors">Save Endpoint</button>
+                </div>
+            </div>
+
+            <!-- Tab 2: Copyable Serverless Backend Templates -->
+            <div id="modal-tab-deploy" class="hidden space-y-4">
+                <p class="text-xs text-slate-600 leading-relaxed">
+                    Add <code class="px-1.5 py-0.5 bg-white/80 rounded border border-slate-200">GEMINI_API_KEY</code> to your host's environment variables (e.g., Vercel / Cloudflare / Render), then deploy one of these snippets as <code class="px-1.5 py-0.5 bg-white/80 rounded border border-slate-200">/api/chat</code>:
+                </p>
+
+                <div class="flex flex-wrap gap-1.5">
+                    <button id="snippet-btn-vercel" onclick="selectBackendSnippet('vercel')" class="px-2.5 py-1 rounded-lg text-[11px] font-medium bg-slate-200 text-slate-900">Vercel / Node (api/chat.js)</button>
+                    <button id="snippet-btn-worker" onclick="selectBackendSnippet('worker')" class="px-2.5 py-1 rounded-lg text-[11px] font-medium bg-white/70 text-slate-600 hover:bg-slate-100">Cloudflare Worker</button>
+                    <button id="snippet-btn-fastapi" onclick="selectBackendSnippet('fastapi')" class="px-2.5 py-1 rounded-lg text-[11px] font-medium bg-white/70 text-slate-600 hover:bg-slate-100">Python FastAPI</button>
+                </div>
+
+                <div class="relative">
+                    <button onclick="copyBackendSnippet()" class="absolute top-2.5 right-2.5 px-2.5 py-1 rounded-lg text-[11px] font-medium bg-slate-800 hover:bg-slate-950 text-white transition-colors">
+                        Copy Code
+                    </button>
+                    <pre id="backend-snippet-code" class="p-4 pr-24 rounded-xl bg-slate-900 text-slate-100 text-[11px] leading-relaxed overflow-x-auto max-h-64 font-mono"></pre>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- =========================================================
+         INLINE NOTIFICATION TOAST (Replaces alert())
+         ========================================================= -->
+    <div id="toast-box" class="fixed top-5 right-5 z-50 hidden px-4 py-2.5 rounded-2xl bg-slate-800 text-white text-xs shadow-lg animate-float-in"></div>
+
+    <!-- =========================================================
+         JAVASCRIPT: CBSE CLASS 10 PHYSICS ENGINE + LIQUID UI LOGIC
+         ========================================================= -->
+    <script>
+        /**
+         * Application State & LocalStorage Persistence (No Secret API Keys Stored)
+         */
+        const STORAGE_KEY_SESSIONS = 'visionary_physics_sessions_v1';
+        const STORAGE_KEY_PROXY_URL = 'visionary_physics_proxy_url';
+        const DEFAULT_PROXY_URL = '/api/chat';
+
+        let sessions = [];
+        let currentSessionId = null;
+        let isGenerating = false;
+        let activeTopicContext = null;
+        let activeSnippetKey = 'vercel';
+
+        const BACKEND_SNIPPETS = {
+            vercel: `// File: api/chat.js (Vercel Serverless Function / Node 18+)
+// Set GEMINI_API_KEY in your host's Environment Variables.
+
+const SYSTEM_INSTRUCTION = \`You are VISIONARY CHAT, a CBSE Class 10 Physics tutor.
+Stick to the rationalized NCERT/CBSE Class 10 Physics syllabus:
+1. Light – Reflection and Refraction
+2. The Human Eye and the Colourful World
+3. Electricity
+4. Magnetic Effects of Electric Current
+Exclude deleted topics (Electric Motor, Generator, Electromagnetic Induction).
+Format responses cleanly with <p>, <h4>, <ul>, <li>, <strong>, and <span class="formula-chip">...</span>.\`;
+
+export default async function handler(req, res) {
+  if (req.method !== 'POST') {
+    return res.status(405).json({ error: 'Method not allowed' });
+  }
+
+  const apiKey = process.env.GEMINI_API_KEY;
+  if (!apiKey) {
+    return res.status(503).json({ error: 'Server GEMINI_API_KEY not configured' });
+  }
+
+  const { message, history = [], topic = null } = req.body || {};
+  if (!message || typeof message !== 'string' || message.length > 1500) {
+    return res.status(400).json({ error: 'Invalid or overly long message' });
+  }
+
+  const contents = [
+    ...history.slice(-8).map((m) => ({
+      role: m.role === 'user' ? 'user' : 'model',
+      parts: [{ text: String(m.text || '').slice(0, 2000) }],
+    })),
+    {
+      role: 'user',
+      parts: [{ text: topic ? \`[Topic: \${topic}] \${message}\` : message }],
+    },
+  ];
+
+  try {
+    const url = \`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=\${encodeURIComponent(apiKey)}\`;
+    const upstream = await fetch(url, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        systemInstruction: { parts: [{ text: SYSTEM_INSTRUCTION }] },
+        contents,
+        generationConfig: { temperature: 0.35, maxOutputTokens: 900 },
+      }),
+    });
+
+    if (!upstream.ok) {
+      return res.status(502).json({ error: 'Upstream AI request failed' });
+    }
+
+    const data = await upstream.json();
+    const reply = data?.candidates?.[0]?.content?.parts?.[0]?.text || '';
+    return res.status(200).json({ reply });
+  } catch (err) {
+    return res.status(500).json({ error: 'Proxy error' });
+  }
+}`,
+
+            worker: `// Cloudflare Worker (/api/chat route)
+// Add secret GEMINI_API_KEY via: wrangler secret put GEMINI_API_KEY
+
+const SYSTEM_INSTRUCTION = \`You are VISIONARY CHAT, a CBSE Class 10 Physics tutor.
+Answer strictly within CBSE Class 10 Physics (Light, Human Eye, Electricity, Magnetic Effects).
+Format using clean HTML (<p>, <h4>, <ul>, <li>, <strong>, <span class="formula-chip">...</span>).\`;
+
+export default {
+  async fetch(request, env) {
+    if (request.method === 'OPTIONS') {
+      return new Response(null, { status: 204, headers: corsHeaders() });
+    }
+    if (request.method !== 'POST') {
+      return jsonResponse({ error: 'Method not allowed' }, 405);
+    }
+    if (!env.GEMINI_API_KEY) {
+      return jsonResponse({ error: 'Missing GEMINI_API_KEY secret' }, 503);
+    }
+
+    const { message, history = [], topic = null } = await request.json();
+    if (!message || typeof message !== 'string' || message.length > 1500) {
+      return jsonResponse({ error: 'Invalid message' }, 400);
+    }
+
+    const contents = [
+      ...history.slice(-8).map((m) => ({
+        role: m.role === 'user' ? 'user' : 'model',
+        parts: [{ text: String(m.text || '').slice(0, 2000) }],
+      })),
+      { role: 'user', parts: [{ text: topic ? \`[Topic: \${topic}] \${message}\` : message }] },
+    ];
+
+    const endpoint = \`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=\${encodeURIComponent(env.GEMINI_API_KEY)}\`;
+    const res = await fetch(endpoint, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        systemInstruction: { parts: [{ text: SYSTEM_INSTRUCTION }] },
+        contents,
+        generationConfig: { temperature: 0.35, maxOutputTokens: 900 },
+      }),
+    });
+
+    if (!res.ok) return jsonResponse({ error: 'Upstream AI error' }, 502);
+    const data = await res.json();
+    const reply = data?.candidates?.[0]?.content?.parts?.[0]?.text || '';
+    return jsonResponse({ reply }, 200);
+  },
+};
+
+function corsHeaders() {
+  return {
+    'Access-Control-Allow-Origin': '*',
+    'Access-Control-Allow-Methods': 'POST, OPTIONS',
+    'Access-Control-Allow-Headers': 'Content-Type',
+  };
+}
+
+function jsonResponse(obj, status = 200) {
+  return new Response(JSON.stringify(obj), {
+    status,
+    headers: { 'Content-Type': 'application/json', ...corsHeaders() },
+  });
+}`,
+
+            fastapi: `# File: main.py (Python FastAPI backend)
+# Run with: GEMINI_API_KEY="your_key" uvicorn main:app --reload
+
+import os
+from typing import List, Optional
+from fastapi import FastAPI, HTTPException
+from fastapi.middleware.cors import CORSMiddleware
+from pydantic import BaseModel, Field
+import httpx
+
+app = FastAPI()
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_methods=["POST", "OPTIONS"],
+    allow_headers=["*"],
+)
+
+SYSTEM_INSTRUCTION = """You are VISIONARY CHAT, a CBSE Class 10 Physics tutor.
+Stick to the rationalized NCERT/CBSE Class 10 Physics syllabus (Light, Human Eye, Electricity, Magnetic Effects).
+Format responses cleanly using <p>, <h4>, <ul>, <li>, <strong>, and <span class="formula-chip">...</span>."""
+
+class ChatTurn(BaseModel):
+    role: str
+    text: str
+
+class ChatRequest(BaseModel):
+    message: str = Field(..., min_length=1, max_length=1500)
+    history: List[ChatTurn] = []
+    topic: Optional[str] = None
+
+@app.post("/api/chat")
+async def chat_proxy(req: ChatRequest):
+    api_key = os.getenv("GEMINI_API_KEY")
+    if not api_key:
+        raise HTTPException(status_code=503, detail="GEMINI_API_KEY not configured on server")
+
+    contents = [
+        {
+            "role": "user" if turn.role == "user" else "model",
+            "parts": [{"text": turn.text[:2000]}],
+        }
+        for turn in req.history[-8:]
+    ]
+    prompt_text = f"[Topic: {req.topic}] {req.message}" if req.topic else req.message
+    contents.append({"role": "user", "parts": [{"text": prompt_text}]})
+
+    url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key={api_key}"
+    async with httpx.AsyncClient(timeout=25.0) as client:
+        resp = await client.post(
+            url,
+            json={
+                "systemInstruction": {"parts": [{"text": SYSTEM_INSTRUCTION}]},
+                "contents": contents,
+                "generationConfig": {"temperature": 0.35, "maxOutputTokens": 900},
+            },
+        )
+    if resp.status_code != 200:
+        raise HTTPException(status_code=502, detail="Upstream AI error")
+
+    data = resp.json()
+    reply = (
+        data.get("candidates", [{}])[0]
+        .get("content", {})
+        .get("parts", [{}])[0]
+        .get("text", "")
+    )
+    return {"reply": reply}`
+        };
+
+        function getProxyEndpoint() {
+            const saved = (localStorage.getItem(STORAGE_KEY_PROXY_URL) || '').trim();
+            return saved || DEFAULT_PROXY_URL;
+        }
+
+        function loadApiStatus() {
+            const endpoint = getProxyEndpoint();
+            const labelEl = document.getElementById('api-status-label');
+            const dotEl = document.getElementById('api-status-dot');
+            const inputEl = document.getElementById('proxy-url-input');
+
+            if (labelEl) {
+                const shortLabel = endpoint.length > 20 ? endpoint.slice(0, 18) + '…' : endpoint;
+                labelEl.textContent = `Proxy: ${shortLabel}`;
+                labelEl.title = `Active proxy endpoint: ${endpoint}`;
+            }
+            if (inputEl) {
+                inputEl.value = endpoint;
+            }
+            if (dotEl) {
+                dotEl.className = 'w-1.5 h-1.5 rounded-full bg-emerald-400';
+                dotEl.title = `Endpoint configured: ${endpoint}`;
+            }
+        }
+
+        function openSettingsModal() {
+            loadApiStatus();
+            switchModalTab('connection');
+            selectBackendSnippet(activeSnippetKey);
+            const modal = document.getElementById('settings-modal');
+            if (modal) {
+                modal.classList.remove('hidden');
+                modal.classList.add('flex');
+            }
+        }
+
+        function closeSettingsModal() {
+            const modal = document.getElementById('settings-modal');
+            if (modal) {
+                modal.classList.add('hidden');
+                modal.classList.remove('flex');
+            }
+        }
+
+        function switchModalTab(tabName) {
+            const connTab = document.getElementById('modal-tab-connection');
+            const deployTab = document.getElementById('modal-tab-deploy');
+            const connBtn = document.getElementById('tab-btn-connection');
+            const deployBtn = document.getElementById('tab-btn-deploy');
+
+            const isConnection = tabName === 'connection';
+            if (connTab) connTab.classList.toggle('hidden', !isConnection);
+            if (deployTab) deployTab.classList.toggle('hidden', isConnection);
+
+            if (connBtn) {
+                connBtn.className = isConnection
+                    ? 'px-3 py-1.5 rounded-xl text-xs font-medium bg-slate-800 text-white transition-colors'
+                    : 'px-3 py-1.5 rounded-xl text-xs font-medium text-slate-600 hover:bg-slate-100 transition-colors';
+            }
+            if (deployBtn) {
+                deployBtn.className = !isConnection
+                    ? 'px-3 py-1.5 rounded-xl text-xs font-medium bg-slate-800 text-white transition-colors'
+                    : 'px-3 py-1.5 rounded-xl text-xs font-medium text-slate-600 hover:bg-slate-100 transition-colors';
+            }
+        }
+
+        function saveProxySettings() {
+            const inputEl = document.getElementById('proxy-url-input');
+            const val = (inputEl ? inputEl.value : '').trim();
+            if (!val) {
+                showToast('Please enter a valid proxy endpoint URL or path');
+                return;
+            }
+            localStorage.setItem(STORAGE_KEY_PROXY_URL, val);
+            loadApiStatus();
+            closeSettingsModal();
+            showToast(`Saved proxy endpoint: ${val}`);
+        }
+
+        function resetProxyUrl() {
+            localStorage.removeItem(STORAGE_KEY_PROXY_URL);
+            loadApiStatus();
+            showToast('Reset proxy endpoint to /api/chat');
+        }
+
+        function selectBackendSnippet(key) {
+            if (!BACKEND_SNIPPETS[key]) return;
+            activeSnippetKey = key;
+            const codeEl = document.getElementById('backend-snippet-code');
+            if (codeEl) {
+                codeEl.textContent = BACKEND_SNIPPETS[key];
+            }
+            ['vercel', 'worker', 'fastapi'].forEach(k => {
+                const btn = document.getElementById('snippet-btn-' + k);
+                if (!btn) return;
+                btn.className = k === key
+                    ? 'px-2.5 py-1 rounded-lg text-[11px] font-medium bg-slate-200 text-slate-900'
+                    : 'px-2.5 py-1 rounded-lg text-[11px] font-medium bg-white/70 text-slate-600 hover:bg-slate-100';
+            });
+        }
+
+        function copyBackendSnippet() {
+            const code = BACKEND_SNIPPETS[activeSnippetKey] || '';
+            const tempArea = document.createElement('textarea');
+            tempArea.value = code;
+            tempArea.setAttribute('readonly', '');
+            tempArea.style.position = 'absolute';
+            tempArea.style.left = '-9999px';
+            document.body.appendChild(tempArea);
+            tempArea.select();
+            try {
+                document.execCommand('copy');
+                showToast('Backend proxy code copied to clipboard');
+            } catch (err) {
+                showToast('Unable to copy automatically');
+            }
+            document.body.removeChild(tempArea);
+        }
+
+        const PHYSICS_TOPICS = {
+            'spherical-mirrors': {
+                chapter: 'Chapter 1: Light – Reflection and Refraction',
+                title: 'Spherical Mirrors & Ray Diagrams',
+                keywords: ['mirror', 'concave', 'convex', 'ray diagram', 'pole', 'focus', 'curvature', 'reflection'],
+                html: `
+                    <p>Spherical mirrors are reflecting surfaces forming part of a hollow sphere: a <strong>concave mirror</strong> curves inward, while a <strong>convex mirror</strong> bulges outward.</p>
+                    <h4>Key Terms & Formulas</h4>
+                    <ul>
+                        <li><strong>Relation between Radius of Curvature & Focal Length:</strong> <span class="formula-chip">R = 2f</span> (for spherical mirrors of small aperture).</li>
+                        <li><strong>Concave Mirror Uses:</strong> Torches, searchlights, vehicle headlights, shaving mirrors, and dentist mirrors (enlarged erect image when object is between $P$ and $F$).</li>
+                        <li><strong>Convex Mirror Uses:</strong> Vehicle rear-view mirrors because it always forms a <strong>virtual, erect, and diminished</strong> image with a wider field of view.</li>
+                    </ul>
+                `
+            },
+            'mirror-formula': {
+                chapter: 'Chapter 1: Light – Reflection and Refraction',
+                title: 'Mirror Formula & Magnification',
+                keywords: ['mirror formula', 'magnification', 'sign convention', 'focal length', 'image distance'],
+                html: `
+                    <p>Using the <strong>New Cartesian Sign Convention</strong>, distances are measured from the pole ($P$): light travels left-to-right, distances in the direction of light are positive, heights above the principal axis are positive, and heights below are negative.</p>
+                    <h4>Key Equations</h4>
+                    <ul>
+                        <li><strong>Mirror Formula:</strong> <span class="formula-chip">1/f = 1/v + 1/u</span></li>
+                        <li><strong>Magnification:</strong> <span class="formula-chip">m = h' / h = -v / u</span></li>
+                        <li>Negative $m$ indicates a <strong>real and inverted</strong> image; positive $m$ indicates a <strong>virtual and erect</strong> image.</li>
+                    </ul>
+                `
+            },
+            'refraction-snells': {
+                chapter: 'Chapter 1: Light – Reflection and Refraction',
+                title: "Refraction & Snell's Law",
+                keywords: ['refraction', 'snell', 'refractive index', 'optically denser', 'rarer', 'glass slab'],
+                html: `
+                    <p>When light enters obliquely from one transparent medium into another, its speed changes and it bends at the boundary. Light bends <strong>towards the normal</strong> going from optically rarer to denser medium, and <strong>away from the normal</strong> going from denser to rarer.</p>
+                    <h4>Laws & Refractive Index</h4>
+                    <ul>
+                        <li><strong>Snell's Law:</strong> For a given pair of media and colour of light, <span class="formula-chip">sin i / sin r = constant (n₂₁)</span>.</li>
+                        <li><strong>Refractive Index:</strong> <span class="formula-chip">n = c / v</span> &nbsp; where $c = 3 \\times 10^8\\text{ m/s}$ is the speed of light in vacuum.</li>
+                        <li>In a rectangular glass slab, the emergent ray is parallel to the incident ray with a <strong>lateral displacement</strong>.</li>
+                    </ul>
+                `
+            },
+            'spherical-lenses': {
+                chapter: 'Chapter 1: Light – Reflection and Refraction',
+                title: 'Spherical Lenses & Power (P = 1/f)',
+                keywords: ['lens', 'convex lens', 'concave lens', 'lens formula', 'power of lens', 'dioptre'],
+                html: `
+                    <p>A <strong>convex lens</strong> is thicker at the middle and converges parallel rays, whereas a <strong>concave lens</strong> is thinner at the middle and diverges parallel rays.</p>
+                    <h4>Lens Equations & Power</h4>
+                    <ul>
+                        <li><strong>Lens Formula:</strong> <span class="formula-chip">1/f = 1/v - 1/u</span></li>
+                        <li><strong>Lens Magnification:</strong> <span class="formula-chip">m = h' / h = v / u</span></li>
+                        <li><strong>Power of a Lens:</strong> <span class="formula-chip">P = 1 / f (in metres)</span> &nbsp; SI unit: <strong>dioptre (D)</strong> ($1\\text{ D} = 1\\text{ m}^{-1}$). Convex lens has <strong>+ve</strong> power; concave lens has <strong>-ve</strong> power.</li>
+                    </ul>
+                `
+            },
+            'eye-accommodation': {
+                chapter: 'Chapter 2: The Human Eye and the Colourful World',
+                title: 'Structure of Eye & Accommodation',
+                keywords: ['human eye', 'accommodation', 'retina', 'pupil', 'iris', 'ciliary', 'near point', 'far point'],
+                html: `
+                    <p>The human eye has a crystalline lens that forms a <strong>real and inverted</strong> image on the light-sensitive <strong>retina</strong>. The <strong>iris</strong> controls pupil size to regulate light entering the eye.</p>
+                    <h4>Power of Accommodation</h4>
+                    <ul>
+                        <li>The ability of the eye lens to adjust its focal length via <strong>ciliary muscles</strong> is called <strong>accommodation</strong>.</li>
+                        <li><strong>Near Point (least distance of distinct vision):</strong> <span class="formula-chip">25 cm</span> for a normal young adult eye.</li>
+                        <li><strong>Far Point:</strong> <span class="formula-chip">Infinity (&infin;)</span> for a normal eye.</li>
+                    </ul>
+                `
+            },
+            'vision-defects': {
+                chapter: 'Chapter 2: The Human Eye and the Colourful World',
+                title: 'Defects of Vision & Correction',
+                keywords: ['myopia', 'hypermetropia', 'presbyopia', 'near-sightedness', 'far-sightedness', 'bifocal'],
+                html: `
+                    <ul>
+                        <li><strong>Myopia (Near-sightedness):</strong> Can see nearby objects clearly, but far point is closer than infinity; image forms <strong>in front of the retina</strong>. Corrected using a <strong>concave lens</strong> of suitable power.</li>
+                        <li><strong>Hypermetropia (Far-sightedness):</strong> Can see distant objects clearly, but near point is farther than $25\\text{ cm}$; image forms <strong>behind the retina</strong>. Corrected using a <strong>convex lens</strong>.</li>
+                        <li><strong>Presbyopia:</strong> Age-related weakening of ciliary muscles and reduced lens flexibility; often requires <strong>bi-focal lenses</strong> (concave upper part, convex lower part).</li>
+                    </ul>
+                `
+            },
+            'prism-dispersion': {
+                chapter: 'Chapter 2: The Human Eye and the Colourful World',
+                title: 'Refraction Through Prism & Dispersion',
+                keywords: ['prism', 'dispersion', 'spectrum', 'vibgyor', 'rainbow', 'angle of deviation', 'red', 'violet'],
+                html: `
+                    <p>In a triangular glass prism, the refracting surfaces are inclined at an angle (angle of prism). The emergent ray bends towards the base of the prism.</p>
+                    <h4>Dispersion & Spectrum</h4>
+                    <ul>
+                        <li>Splitting of white light into its component colours (<strong>VIBGYOR</strong>) is called <strong>dispersion</strong>.</li>
+                        <li><strong>Red</strong> bends the least (longest wavelength) and <strong>violet</strong> bends the most (shortest wavelength).</li>
+                        <li>A <strong>rainbow</strong> is formed by dispersion, internal reflection, and refraction of sunlight by tiny water droplets suspended after rain.</li>
+                    </ul>
+                `
+            },
+            'atmospheric-scattering': {
+                chapter: 'Chapter 2: The Human Eye and the Colourful World',
+                title: 'Atmospheric Refraction & Tyndall Effect',
+                keywords: ['atmospheric refraction', 'twinkling', 'tyndall', 'scattering', 'blue sky', 'sunrise', 'sunset'],
+                html: `
+                    <ul>
+                        <li><strong>Twinkling of Stars:</strong> Caused by continuous <strong>atmospheric refraction</strong> of starlight through air layers of gradually changing optical density. Planets do not twinkle as they act as extended sources.</li>
+                        <li><strong>Tyndall Effect:</strong> Scattering of light by colloidal particles in a medium (e.g., beam of sunlight entering a smoke-filled room or forest canopy).</li>
+                        <li>Shorter wavelengths (blue) scatter much more than longer wavelengths (red), making the clear sky blue.</li>
+                    </ul>
+                `
+            },
+            'ohms-law': {
+                chapter: 'Chapter 3: Electricity',
+                title: "Current, Potential & Ohm's Law",
+                keywords: ["ohm's law", 'current', 'potential difference', 'voltage', 'ampere', 'volt', 'circuit'],
+                html: `
+                    <p><strong>Electric current</strong> ($I$) is the rate of flow of electric charge: <span class="formula-chip">I = Q / t</span> (SI unit: <strong>ampere, A</strong>; $1\\text{ A} = 1\\text{ C s}^{-1}$).</p>
+                    <p><strong>Potential difference</strong> ($V$) between two points is work done per unit charge: <span class="formula-chip">V = W / Q</span> (SI unit: <strong>volt, V</strong>).</p>
+                    <h4>Ohm's Law</h4>
+                    <ul>
+                        <li>At constant temperature, potential difference across a metallic conductor is directly proportional to current: <span class="formula-chip">V = I R</span>.</li>
+                        <li>The $V\text{–}I$ graph for an ohmic conductor is a straight line passing through the origin; its slope equals resistance $R$.</li>
+                    </ul>
+                `
+            },
+            'resistance-resistivity': {
+                chapter: 'Chapter 3: Electricity',
+                title: 'Resistance & Resistivity (R = ρl/A)',
+                keywords: ['resistance', 'resistivity', 'ohm', 'ohm-metre', 'length', 'area', 'alloy'],
+                html: `
+                    <p><strong>Resistance</strong> ($R$) opposes the flow of charge in a conductor (SI unit: <strong>ohm, &Omega;</strong>).</p>
+                    <h4>Factors Affecting Resistance</h4>
+                    <ul>
+                        <li>Directly proportional to length ($R \\propto l$) and inversely proportional to cross-sectional area ($R \\propto 1/A$): <span class="formula-chip">R = &rho; (l / A)</span>.</li>
+                        <li><strong>Resistivity (&rho;)</strong> (SI unit: <strong>&Omega;&middot;m</strong>) depends on the <em>material</em> and <em>temperature</em>, not on length or area.</li>
+                        <li>Alloys have higher resistivity than pure metals and do not oxidize readily at high temperatures, making them ideal for heating elements.</li>
+                    </ul>
+                `
+            },
+            'series-parallel': {
+                chapter: 'Chapter 3: Electricity',
+                title: 'Series & Parallel Combinations',
+                keywords: ['series', 'parallel', 'equivalent resistance', 'resistors', 'ammeter', 'voltmeter'],
+                html: `
+                    <ul>
+                        <li><strong>Series Connection:</strong> Same current flows through each resistor; total voltage divides: <span class="formula-chip">Rₛ = R₁ + R₂ + R₃ + ...</span>.</li>
+                        <li><strong>Parallel Connection:</strong> Same voltage across each resistor; total current divides: <span class="formula-chip">1/Rₚ = 1/R₁ + 1/R₂ + 1/R₃ + ...</span>.</li>
+                        <li><strong>Ammeter</strong> is always connected in <strong>series</strong> (low resistance); <strong>Voltmeter</strong> is always connected in <strong>parallel</strong> (high resistance).</li>
+                    </ul>
+                `
+            },
+            'heating-power': {
+                chapter: 'Chapter 3: Electricity',
+                title: 'Heating Effect (H = I²Rt) & Power',
+                keywords: ['heating effect', 'joule', 'power', 'kilowatt hour', 'kwh', 'fuse', 'watt'],
+                html: `
+                    <ul>
+                        <li><strong>Joule's Law of Heating:</strong> Heat produced in a resistor is <span class="formula-chip">H = I² R t</span>. Used in electric irons, toasters, and <strong>electric fuses</strong> (low melting point wire connected in series).</li>
+                        <li><strong>Electric Power:</strong> Rate of doing work or consuming electrical energy: <span class="formula-chip">P = V I = I² R = V² / R</span> (SI unit: <strong>watt, W</strong>).</li>
+                        <li><strong>Commercial Unit of Energy:</strong> <span class="formula-chip">1 kWh = 1000 W &times; 3600 s = 3.6 &times; 10⁶ J</span>.</li>
+                    </ul>
+                `
+            },
+            'magnetic-field-thumb': {
+                chapter: 'Chapter 4: Magnetic Effects of Electric Current',
+                title: 'Field Lines & Right-Hand Thumb Rule',
+                keywords: ['magnetic field', 'field lines', 'right-hand thumb rule', 'compass', 'straight conductor'],
+                html: `
+                    <p>A <strong>magnetic field</strong> is the region around a magnet or current-carrying conductor where magnetic force is experienced.</p>
+                    <ul>
+                        <li><strong>Magnetic Field Lines:</strong> Emerge from the <strong>North pole</strong> and merge at the <strong>South pole</strong> outside a magnet (closed loops). Closeness indicates field strength; field lines <strong>never intersect</strong>.</li>
+                        <li><strong>Right-Hand Thumb Rule:</strong> Point the right thumb along the current; curled fingers show the direction of magnetic field lines.</li>
+                    </ul>
+                `
+            },
+            'solenoid-electromagnet': {
+                chapter: 'Chapter 4: Magnetic Effects of Electric Current',
+                title: 'Solenoid & Electromagnet',
+                keywords: ['solenoid', 'electromagnet', 'soft iron', 'coil', 'uniform magnetic field'],
+                html: `
+                    <ul>
+                        <li>A <strong>solenoid</strong> is a coil of many circular turns of insulated copper wire wrapped closely in the shape of a cylinder.</li>
+                        <li>Inside a current-carrying solenoid, the magnetic field is nearly <strong>uniform</strong> (parallel equidistant lines), behaving like a bar magnet with North and South poles at its ends.</li>
+                        <li>Placing a <strong>soft iron</strong> core inside a solenoid forms a strong <strong>electromagnet</strong> whose magnetism turns off when current stops.</li>
+                    </ul>
+                `
+            },
+            'flemings-left-hand': {
+                chapter: 'Chapter 4: Magnetic Effects of Electric Current',
+                title: "Fleming's Left-Hand Rule",
+                keywords: ["fleming's left-hand rule", 'force', 'magnetic field', 'current', 'charge', 'deflect'],
+                html: `
+                    <p>A current-carrying conductor placed in a magnetic field experiences a mechanical force perpendicular to both the current and the magnetic field (maximum when perpendicular).</p>
+                    <ul>
+                        <li>Stretch the <strong>thumb, forefinger, and middle finger</strong> of the left hand mutually perpendicular:</li>
+                        <li><strong>Forefinger</strong> &rarr; Magnetic field direction</li>
+                        <li><strong>Middle finger</strong> &rarr; Current direction</li>
+                        <li><strong>Thumb</strong> &rarr; Direction of force (motion)</li>
+                    </ul>
+                `
+            },
+            'domestic-circuits': {
+                chapter: 'Chapter 4: Magnetic Effects of Electric Current',
+                title: 'Domestic Electric Circuits & Safety',
+                keywords: ['domestic circuit', 'live wire', 'neutral wire', 'earth wire', 'short circuit', 'overloading', 'fuse'],
+                html: `
+                    <ul>
+                        <li>Domestic AC supply in India is typically <span class="formula-chip">220 V</span>, <span class="formula-chip">50 Hz</span>.</li>
+                        <li><strong>Live wire</strong> (high potential, red/brown insulation), <strong>Neutral wire</strong> (zero potential, black/blue insulation), and <strong>Earth wire</strong> (green/yellow-green insulation for safety against shock).</li>
+                        <li><strong>Overloading</strong> occurs when too many appliances draw high current simultaneously; <strong>short-circuiting</strong> occurs when live and neutral wires touch directly. A <strong>fuse</strong> or <strong>MCB</strong> protects the circuit.</li>
+                    </ul>
+                `
+            }
+        };
+
+        // Pre-built sample numericals & quizzes for instant interactive responses
+        const SAMPLE_NUMERICALS = [
+            {
+                title: "Worked Numerical: Concave Mirror Formula",
+                html: `
+                    <p><strong>Problem:</strong> An object $4.0\\text{ cm}$ in size is placed at $25.0\\text{ cm}$ in front of a concave mirror of focal length $15.0\\text{ cm}$. Find the image position, nature, and size.</p>
+                    <h4>Step-by-Step Solution</h4>
+                    <ul>
+                        <li><strong>Given (Cartesian Sign Convention):</strong><br>$h = +4.0\\text{ cm}$, &nbsp; $u = -25.0\\text{ cm}$, &nbsp; $f = -15.0\\text{ cm}$</li>
+                        <li><strong>Apply Mirror Formula:</strong> <span class="formula-chip">1/v + 1/u = 1/f</span><br>
+                        $1/v = 1/(-15) - 1/(-25) = -1/15 + 1/25 = (-5 + 3)/75 = -2/75$<br>
+                        &rArr; <span class="formula-chip">v = -37.5 cm</span> (in front of the mirror)</li>
+                        <li><strong>Find Magnification & Size:</strong> <span class="formula-chip">m = h'/h = -v/u</span><br>
+                        $h' = -(-37.5 / -25.0) \\times 4.0 = -1.5 \\times 4.0 = $ <span class="formula-chip">-6.0 cm</span></li>
+                    </ul>
+                    <p><strong>Conclusion:</strong> The image is formed at $37.5\\text{ cm}$ in front of the mirror, and is <strong>real, inverted, and enlarged</strong> ($6.0\\text{ cm}$ tall).</p>
+                `
+            },
+            {
+                title: "Worked Numerical: Parallel Resistors & Power",
+                html: `
+                    <p><strong>Problem:</strong> Two resistors of $6\\,\\Omega$ and $12\\,\\Omega$ are connected in parallel across a $12\\text{ V}$ battery. Find the total resistance and total current drawn.</p>
+                    <h4>Step-by-Step Solution</h4>
+                    <ul>
+                        <li><strong>Equivalent Parallel Resistance:</strong> <span class="formula-chip">1/Rₚ = 1/6 + 1/12 = 3/12 = 1/4</span> &rArr; <span class="formula-chip">Rₚ = 4 &Omega;</span></li>
+                        <li><strong>Total Current (Ohm's Law):</strong> <span class="formula-chip">I = V / Rₚ = 12 / 4 = 3 A</span></li>
+                        <li><strong>Total Power Consumed:</strong> <span class="formula-chip">P = V &times; I = 12 &times; 3 = 36 W</span></li>
+                    </ul>
+                `
+            }
+        ];
+
+        const SAMPLE_QUIZ = `
+            <p><strong>CBSE Board Practice Check (3 Quick Questions):</strong></p>
+            <ul>
+                <li><strong>Q1.</strong> An object is placed at $20\\text{ cm}$ in front of a convex lens of focal length $10\\text{ cm}$. Where is the image formed?<br>
+                <em>Answer:</em> At <strong>$+20\\text{ cm}$</strong> ($2F_2$) on the other side, real, inverted, and of the same size ($m = -1$).</li>
+                <li><strong>Q2.</strong> Why does the sky appear dark instead of blue to an astronaut in space?<br>
+                <em>Answer:</em> There is <strong>no atmosphere</strong> in outer space to scatter sunlight, so no scattered light reaches the astronaut's eyes.</li>
+                <li><strong>Q3.</strong> An electron enters a uniform magnetic field perpendicularly from left to right while the field points into the page. In which direction is it deflected?<br>
+                <em>Answer:</em> Conventional current is right-to-left; by <strong>Fleming's Left-Hand Rule</strong>, the electron deflects <strong>downwards</strong>.</li>
+            </ul>
+            <p>Ask me to explain any of these in detail or pick another topic from the left sidebar!</p>
+        `;
+
+        /**
+         * Application State & LocalStorage Persistence
+         */
+        // DOM References
+        const messagesContainer = document.getElementById('messages-container');
+        const chatScrollArea = document.getElementById('chat-scroll-area');
+        const typingIndicator = document.getElementById('typing-indicator');
+        const userInput = document.getElementById('user-input');
+        const historyList = document.getElementById('history-list');
+        const historyCountBadge = document.getElementById('history-count-badge');
+
+        // Initialize on Window Load
+        window.onload = function () {
+            loadApiStatus();
+            loadSessionsFromStorage();
+            if (sessions.length === 0) {
+                startNewChat(true);
+            } else {
+                loadSession(sessions[0].id);
+            }
+        };
+
+        /**
+         * Session & History Management
+         */
+        function loadSessionsFromStorage() {
+            try {
+                const raw = localStorage.getItem(STORAGE_KEY_SESSIONS);
+                sessions = raw ? JSON.parse(raw) : [];
+            } catch (e) {
+                sessions = [];
+            }
+            renderHistoryList();
+        }
+
+        function saveSessionsToStorage() {
+            try {
+                localStorage.setItem(STORAGE_KEY_SESSIONS, JSON.stringify(sessions.slice(0, 20)));
+            } catch (e) {
+                console.warn('Storage quota reached');
+            }
+            renderHistoryList();
+        }
+
+        function startNewChat(isInitial = false) {
+            const newId = 'chat_' + Date.now();
+            const welcomeMsg = {
+                role: 'ai',
+                html: `
+                    <p>Hello! I'm your AI study assistant for <strong>CBSE Class 10 Physics</strong>.</p>
+                    <p>Select any topic from the sidebar—such as <strong>Spherical Mirrors</strong>, <strong>Defects of Vision</strong>, <strong>Ohm's Law</strong>, or <strong>Fleming's Left-Hand Rule</strong>—or ask me a formula, conceptual doubt, or numerical below.</p>
+                `
+            };
+
+            const session = {
+                id: newId,
+                title: 'New Physics Session',
+                updatedAt: Date.now(),
+                messages: [welcomeMsg]
+            };
+
+            sessions.unshift(session);
+            currentSessionId = newId;
+            saveSessionsToStorage();
+            renderMessages(session.messages);
+
+            if (!isInitial) {
+                toggleSidebar(false);
+                userInput.focus();
+            }
+        }
+
+        function loadSession(id) {
+            const found = sessions.find(s => s.id === id);
+            if (!found) return;
+            currentSessionId = id;
+            renderMessages(found.messages);
+            toggleSidebar(false);
+        }
+
+        function deleteSession(e, id) {
+            e.stopPropagation();
+            sessions = sessions.filter(s => s.id !== id);
+            saveSessionsToStorage();
+            if (currentSessionId === id) {
+                if (sessions.length > 0) {
+                    loadSession(sessions[0].id);
+                } else {
+                    startNewChat();
+                }
+            }
+        }
+
+        function renderHistoryList() {
+            historyCountBadge.textContent = sessions.length;
+            historyList.innerHTML = '';
+
+            if (sessions.length === 0) {
+                historyList.innerHTML = `<p class="text-[11px] text-slate-400 px-2 py-1">No saved chats yet.</p>`;
+                return;
+            }
+
+            sessions.forEach(session => {
+                const isActive = session.id === currentSessionId;
+                const item = document.createElement('div');
+                item.className = `group flex items-center justify-between px-2.5 py-1.5 rounded-lg text-xs cursor-pointer transition-colors ${
+                    isActive ? 'bg-slate-100 text-slate-900 font-medium' : 'text-slate-500 hover:bg-slate-50 hover:text-slate-800'
+                }`;
+                item.onclick = () => loadSession(session.id);
+
+                const titleSpan = document.createElement('span');
+                titleSpan.className = 'truncate pr-2';
+                titleSpan.textContent = session.title;
+
+                const delBtn = document.createElement('button');
+                delBtn.className = 'opacity-0 group-hover:opacity-100 text-slate-400 hover:text-rose-500 p-0.5 transition-opacity';
+                delBtn.title = 'Delete chat';
+                delBtn.innerHTML = '&times;';
+                delBtn.onclick = (e) => deleteSession(e, session.id);
+
+                item.appendChild(titleSpan);
+                item.appendChild(delBtn);
+                historyList.appendChild(item);
+            });
+        }
+
+        /**
+         * Rendering Chat Bubbles (Liquid Glass AI vs Flat Neutral User)
+         */
+        function renderMessages(messages) {
+            messagesContainer.innerHTML = '';
+            messages.forEach(msg => appendMessageElement(msg.role, msg.html || msg.text, false));
+            scrollToBottom();
+        }
+
+        function appendMessageElement(role, content, animate = true) {
+            const wrapper = document.createElement('div');
+            wrapper.className = `flex w-full ${role === 'user' ? 'justify-end' : 'justify-start'} ${animate ? 'animate-float-in' : ''}`;
+
+            const bubble = document.createElement('div');
+            if (role === 'user') {
+                bubble.className = 'user-pill-bubble max-w-[82%] sm:max-w-[75%] px-5 py-3 text-sm leading-relaxed';
+                bubble.textContent = content;
+            } else {
+                bubble.className = 'liquid-glass-bubble ai-prose max-w-[90%] sm:max-w-[84%] px-6 py-4 text-sm leading-relaxed';
+                bubble.innerHTML = content;
+            }
+
+            wrapper.appendChild(bubble);
+            messagesContainer.appendChild(wrapper);
+            scrollToBottom();
+        }
+
+        function scrollToBottom() {
+            requestAnimationFrame(() => {
+                chatScrollArea.scrollTop = chatScrollArea.scrollHeight;
+            });
+        }
+
+        /**
+         * Sidebar & Topic Selection Interactions
+         */
+        function toggleSidebar(open) {
+            const sidebar = document.getElementById('sidebar');
+            const backdrop = document.getElementById('mobile-backdrop');
+            if (open) {
+                sidebar.classList.remove('-translate-x-full');
+                backdrop.classList.remove('hidden');
+            } else {
+                sidebar.classList.add('-translate-x-full');
+                backdrop.classList.add('hidden');
+            }
+        }
+
+        function toggleHistoryDrawer() {
+            const panel = document.getElementById('history-panel');
+            panel.classList.toggle('hidden');
+        }
+
+        function toggleChapter(chapterId) {
+            const list = document.getElementById(chapterId);
+            const icon = document.getElementById('icon-' + chapterId);
+            list.classList.toggle('hidden');
+            icon.classList.toggle('rotate-180');
+        }
+
+        function selectTopic(topicKey) {
+            const topic = PHYSICS_TOPICS[topicKey];
+            if (!topic || isGenerating) return;
+
+            activeTopicContext = topic.title;
+            toggleSidebar(false);
+            const userPrompt = `Explain ${topic.title}`;
+            pushUserAndRespond(userPrompt, () => {
+                return `
+                    <div class="text-[10px] uppercase tracking-[0.14em] text-slate-400 font-semibold mb-1">${topic.chapter}</div>
+                    <h3 class="text-base font-semibold text-slate-900 mb-2">${topic.title}</h3>
+                    ${topic.html}
+                `;
+            });
+        }
+
+        function sendQuickPrompt(text) {
+            if (isGenerating) return;
+            userInput.value = text;
+            handleSendMessage(new Event('submit'));
+        }
+
+        /**
+         * Sending Messages via Backend Proxy (/api/chat) with Graceful Local Fallback
+         */
+        async function handleSendMessage(e) {
+            e.preventDefault();
+            if (isGenerating) return;
+
+            const query = userInput.value.trim();
+            if (!query) return;
+
+            userInput.value = '';
+            const session = sessions.find(s => s.id === currentSessionId);
+            const recentHistory = (session?.messages || [])
+                .slice(-8)
+                .map(m => ({
+                    role: m.role === 'user' ? 'user' : 'assistant',
+                    text: stripHtmlTags(m.html || m.text || '')
+                }));
+
+            await pushUserAndRespond(query, async () => {
+                const proxyUrl = getProxyEndpoint();
+                try {
+                    const proxyReply = await fetchProxyPhysicsResponse(proxyUrl, query, recentHistory, activeTopicContext);
+                    if (proxyReply) {
+                        return proxyReply;
+                    }
+                    throw new Error('Empty proxy reply');
+                } catch (err) {
+                    console.info('Proxy not reachable yet, using built-in Physics study engine:', err.message);
+                    const fallbackHtml = generateLocalPhysicsResponse(query);
+                    return `${fallbackHtml}<p class="text-[11px] text-slate-400 mt-3 pt-2 border-t border-slate-200/50"><em>Showing built-in Class 10 Physics notes because <code class="font-mono">${escapeHtml(proxyUrl)}</code> isn't deployed yet. Once hosted with a server proxy, live AI replies will appear automatically for you and your friends.</em></p>`;
+                }
+            });
+        }
+
+        function stripHtmlTags(htmlStr) {
+            const tmp = document.createElement('div');
+            tmp.innerHTML = htmlStr;
+            return (tmp.textContent || tmp.innerText || '').trim();
+        }
+
+        function escapeHtml(str) {
+            return String(str)
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
+                .replace(/"/g, '&quot;');
+        }
+
+        async function fetchProxyPhysicsResponse(proxyUrl, message, history, topic) {
+            const response = await fetch(proxyUrl, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    message,
+                    history,
+                    topic
+                })
+            });
+
+            if (!response.ok) {
+                throw new Error(`Proxy returned HTTP ${response.status}`);
+            }
+
+            const data = await response.json();
+            const rawReply = (data && (data.reply || data.response || data.text)) || '';
+            if (!rawReply.trim()) {
+                throw new Error('Missing reply field from proxy');
+            }
+            return rawReply.replace(/```html|```/g, '').trim();
+        }
+
+        function sendQuickPrompt(text) {
+            if (isGenerating) return;
+            userInput.value = text;
+            handleSendMessage(new Event('submit'));
+        }
+
+        async function pushUserAndRespond(userText, responseBuilderFn) {
+            isGenerating = true;
+            const session = sessions.find(s => s.id === currentSessionId);
+
+            // Add User Message
+            session.messages.push({ role: 'user', text: userText });
+            if (session.title === 'New Physics Session') {
+                session.title = userText.length > 32 ? userText.slice(0, 32) + '…' : userText;
+            }
+            session.updatedAt = Date.now();
+            saveSessionsToStorage();
+            appendMessageElement('user', userText, true);
+
+            // Show Centered 3-Dot Typing Indicator
+            typingIndicator.classList.remove('hidden');
+            scrollToBottom();
+
+            // Natural response delay + computation
+            const minDelay = new Promise(r => setTimeout(r, 550));
+            const [replyHtml] = await Promise.all([
+                Promise.resolve().then(responseBuilderFn),
+                minDelay
+            ]);
+
+            typingIndicator.classList.add('hidden');
+            session.messages.push({ role: 'ai', html: replyHtml });
+            session.updatedAt = Date.now();
+            saveSessionsToStorage();
+            appendMessageElement('ai', replyHtml, true);
+            isGenerating = false;
+        }
+
+        /**
+         * Built-in Intelligent CBSE Class 10 Physics Search & Synthesis Engine
+         */
+        function generateLocalPhysicsResponse(rawQuery) {
+            const q = rawQuery.toLowerCase();
+
+            // 1. Check for Formula Sheet request
+            if (q.includes('formula') && (q.includes('all') || q.includes('sheet') || q.includes('electricity') || q.includes('light'))) {
+                if (q.includes('electricity')) {
+                    return `
+                        <h3 class="text-base font-semibold text-slate-900 mb-2">CBSE Class 10 Electricity — Master Formula Sheet</h3>
+                        <ul>
+                            <li><strong>Charge & Current:</strong> <span class="formula-chip">Q = n e</span> &nbsp; <span class="formula-chip">I = Q / t</span></li>
+                            <li><strong>Potential Difference:</strong> <span class="formula-chip">V = W / Q</span></li>
+                            <li><strong>Ohm's Law:</strong> <span class="formula-chip">V = I R</span></li>
+                            <li><strong>Resistivity:</strong> <span class="formula-chip">R = &rho; (l / A)</span></li>
+                            <li><strong>Series & Parallel:</strong> <span class="formula-chip">Rₛ = R₁ + R₂ + ...</span> &nbsp; <span class="formula-chip">1/Rₚ = 1/R₁ + 1/R₂ + ...</span></li>
+                            <li><strong>Joule Heating:</strong> <span class="formula-chip">H = I² R t = V I t = (V²/R) t</span></li>
+                            <li><strong>Electric Power:</strong> <span class="formula-chip">P = V I = I² R = V² / R</span> &nbsp; (<span class="formula-chip">1 kWh = 3.6 &times; 10⁶ J</span>)</li>
+                        </ul>
+                    `;
+                }
+                return `
+                    <h3 class="text-base font-semibold text-slate-900 mb-2">CBSE Class 10 Physics — Complete Formula Sheet</h3>
+                    <h4>Light – Reflection & Refraction</h4>
+                    <ul>
+                        <li><span class="formula-chip">R = 2f</span> &nbsp;|&nbsp; Mirror: <span class="formula-chip">1/f = 1/v + 1/u</span> &nbsp;|&nbsp; <span class="formula-chip">m = h'/h = -v/u</span></li>
+                        <li>Snell's Law: <span class="formula-chip">n = sin i / sin r = c / v</span></li>
+                        <li>Lens: <span class="formula-chip">1/f = 1/v - 1/u</span> &nbsp;|&nbsp; <span class="formula-chip">m = v/u</span> &nbsp;|&nbsp; Power: <span class="formula-chip">P = 1/f (m)</span></li>
+                    </ul>
+                    <h4>Electricity</h4>
+                    <ul>
+                        <li><span class="formula-chip">I = Q/t</span> &nbsp;|&nbsp; <span class="formula-chip">V = W/Q</span> &nbsp;|&nbsp; <span class="formula-chip">V = IR</span> &nbsp;|&nbsp; <span class="formula-chip">R = &rho;l/A</span></li>
+                        <li><span class="formula-chip">H = I²Rt</span> &nbsp;|&nbsp; <span class="formula-chip">P = VI = I²R = V²/R</span> &nbsp;|&nbsp; <span class="formula-chip">1 kWh = 3.6 &times; 10⁶ J</span></li>
+                    </ul>
+                `;
+            }
+
+            // 2. Check for Quiz request
+            if (q.includes('quiz') || q.includes('mcq') || q.includes('test me') || q.includes('practice question')) {
+                return SAMPLE_QUIZ;
+            }
+
+            // 3. Check for Worked Numerical request
+            if (q.includes('numerical') || q.includes('solve') || q.includes('problem') || q.includes('calculate')) {
+                if (q.includes('parallel') || q.includes('series') || q.includes('resistor') || q.includes('ohm') || q.includes('electricity')) {
+                    return SAMPLE_NUMERICALS[1].html;
+                }
+                return SAMPLE_NUMERICALS[0].html;
+            }
+
+            // 4. Score matching against all 16 CBSE Class 10 Physics topics
+            let bestTopic = null;
+            let highestScore = 0;
+
+            Object.values(PHYSICS_TOPICS).forEach(topic => {
+                let score = 0;
+                topic.keywords.forEach(kw => {
+                    if (q.includes(kw)) {
+                        score += kw.length > 5 ? 3 : 2;
+                    }
+                });
+                if (q.includes(topic.title.toLowerCase())) score += 5;
+                if (score > highestScore) {
+                    highestScore = score;
+                    bestTopic = topic;
+                }
+            });
+
+            if (bestTopic && highestScore > 0) {
+                return `
+                    <div class="text-[10px] uppercase tracking-[0.14em] text-slate-400 font-semibold mb-1">${bestTopic.chapter}</div>
+                    <h3 class="text-base font-semibold text-slate-900 mb-2">${bestTopic.title}</h3>
+                    ${bestTopic.html}
+                `;
+            }
+
+            // 5. Helpful CBSE Syllabus Guidance Fallback
+            return `
+                <p>I can help you master every concept, formula, and board numerical in <strong>CBSE Class 10 Physics</strong> across all four syllabus chapters:</p>
+                <ul>
+                    <li><strong>Light – Reflection & Refraction:</strong> Concave/convex ray diagrams, Cartesian sign convention, mirror & lens formulas, refractive index, power in dioptres.</li>
+                    <li><strong>The Human Eye & Colourful World:</strong> Power of accommodation, Myopia, Hypermetropia, Presbyopia, prism dispersion, atmospheric refraction & Tyndall effect.</li>
+                    <li><strong>Electricity:</strong> Ohm's Law, resistivity ($R = \\rho l/A$), series/parallel circuits, Joule's law of heating & commercial energy ($\\text{kWh}$).</li>
+                    <li><strong>Magnetic Effects of Electric Current:</strong> Right-Hand Thumb Rule, solenoid, Fleming's Left-Hand Rule, and domestic electric circuits.</li>
+                </ul>
+                <p>Try asking something specific like <em>"State Fleming's Left-Hand Rule"</em> or click any topic on the left sidebar!</p>
+            `;
+        }
+
+        /**
+         * Web Speech API Voice Input
+         */
+        function toggleVoiceInput() {
+            const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+            if (!SpeechRecognition) {
+                showToast('Voice input is not supported in this browser');
+                return;
+            }
+            const recognition = new SpeechRecognition();
+            recognition.lang = 'en-IN';
+            recognition.interimResults = false;
+
+            const micBtn = document.getElementById('mic-btn');
+            micBtn.classList.add('text-rose-500', 'animate-pulse');
+            showToast('Listening... Speak your Physics question');
+
+            recognition.onresult = (event) => {
+                const transcript = event.results[0][0].transcript;
+                userInput.focus();
+            };
+            recognition.onerror = () => {
+                showToast('Could not capture voice. Please try typing.');
+            };
+            recognition.onend = () => {
+                micBtn.classList.remove('text-rose-500', 'animate-pulse');
+            };
+            recognition.start();
+        }
+
+        /**
+         * Non-blocking Toast Notification
+         */
+        let toastTimer = null;
+        function showToast(message) {
+            const box = document.getElementById('toast-box');
+            box.textContent = message;
+            box.classList.remove('hidden');
+            clearTimeout(toastTimer);
+            toastTimer = setTimeout(() => {
+                box.classList.add('hidden');
+            }, 2600);
+        }
+    </script>
+</body>
+</html>    
